@@ -7,6 +7,8 @@ for tasks associated with each authenticated user.
 The main goal of this project is to consolidate backend concepts such as authentication,
 authorization, relational database modeling, and layered architecture.
 
+# Backend
+
 **Features**
 
 - User registration
@@ -15,6 +17,7 @@ authorization, relational database modeling, and layered architecture.
 - Protected routes using authentication middleware
 - Full CRUD for tasks
 - Each user can access only their own tasks
+
 
 **Technologies**
 
@@ -65,12 +68,14 @@ CREATE TABLE tasks (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID NOT NULL,
   title TEXT NOT NULL,
-  completed BOOLEAN NOT NULL DEFAULT false,
+  status TEXT NOT NULL DEFAULT 'todo',
   created_at TIMESTAMP DEFAULT now(),
   CONSTRAINT tasks_user_fk
     FOREIGN KEY (user_id)
     REFERENCES users(id)
-    ON DELETE CASCADE
+    ON DELETE CASCADE,
+  CONSTRAINT tasks_status_check
+    CHECK (status IN ('todo', 'in_progress', 'done'))
 );
 
 **Installation**
@@ -146,16 +151,19 @@ Update task:
 
 PUT /tasks/:id
 
-Body:
-{
-  "completed": true
-}
-
-or
-
+Body (update title):
 {
   "title": "New title"
 }
+
+Body (update status):
+{
+  "status": "in_progress"
+}
+
+- todo
+- in_progress
+- done
 
 Delete task:
 
@@ -170,4 +178,65 @@ in the Authorization header using the Bearer Token format.
 
 - Users cannot access or modify tasks belonging to other users
 - User deletion is not implemented (MVP scope)
-- This project focuses on backend development and future integration with a React frontend
+
+# Frontend
+
+Frontend of the Task Manager application built with React and Vite.  
+This project is responsible for the entire user interface, JWT-based authentication flow, consumption of the backend REST API, and task management for the authenticated user.
+
+The frontend depends on an external backend API and does not function independently without it.
+
+The application provides a complete task management experience, including authentication, task creation and editing, multiple task states, filtering, and a light/dark theme with persistence.
+
+Main features:
+- User registration
+- User login with JWT authentication
+- Protected routes for authenticated users
+- Task creation
+- Task listing per authenticated user
+- Inline task title editing
+- Task status management with three states: pending, in progress, and completed
+- Task deletion
+- Task filtering by status
+- Light and dark theme toggle with persistence in local storage
+- Visual feedback for asynchronous actions
+- Automatic logout on invalid or expired token
+
+Technologies used:
+- React
+- Vite
+- React Router DOM
+
+Requirements:
+- Node.js version 18 or higher
+- Backend application running and accessible via URL
+
+Environment configuration:
+The frontend requires the backend API base URL to be defined.  
+Create a `.env` file in the root of the `frontend` folder with the following content:
+
+VITE_API_URL=http://localhost:3000
+
+Dependency installation:
+Inside the `frontend` directory, install dependencies with:
+
+npm install
+
+Running the project in development mode:
+With the backend already running, start the frontend with:
+
+npm run dev
+
+By default, the application will be available at:
+http://localhost:5173
+
+Authentication flow:
+After a successful login, the JWT token returned by the backend is stored locally in the browser.  
+This token is automatically sent with protected requests.  
+If the backend responds with an authorization error, the user is logged out and redirected to the login page.
+
+Important notes:
+- This frontend fully depends on the backend to function correctly
+- The backend must allow CORS requests from the frontend domain
+- The `.env` file must not be committed to the repository
+- The project was developed with a focus on clean architecture, good practices, and a clear user flow
