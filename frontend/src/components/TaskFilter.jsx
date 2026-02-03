@@ -24,11 +24,17 @@ export default function TaskFilter({ value, onChange }) {
 }
 
 const styles = {
-  toolbar: { margin: "10px 0 12px" },
+  container: {
+    marginBottom: 20,
+  },
   select: {
-    padding: "8px 10px",
-    borderRadius: 10,
-    border: "1px solid #ccc",
-    background: "white",
+    padding: "10px 12px",
+    borderRadius: 12,
+    border: "1px solid var(--filter-border)",
+    background: "var(--filter-bg)",
+    color: "var(--filter-text)",
+    outline: "none",
+    cursor: "pointer",
+    fontSize: 14,
   },
 };

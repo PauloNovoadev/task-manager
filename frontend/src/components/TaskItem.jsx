@@ -140,13 +140,12 @@ const styles = {
   item: {
     padding: 12,
     border: "1px solid var(--border)",
-    background: "var(--card)",
-    color: "var(--text)",
     borderRadius: 12,
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
     gap: 12,
+    background: "var(--card)",
   },
   left: {
     display: "flex",
@@ -159,8 +158,9 @@ const styles = {
     padding: "6px 8px",
     borderRadius: 10,
     border: "1px solid var(--border)",
-    background: "var(--card)",
-    color: "var(--text)",
+    background: "var(--input-bg)",
+    color: "var(--input-text)",
+    outline: "none",
   },
   title: {
     cursor: "text",
@@ -168,15 +168,16 @@ const styles = {
     whiteSpace: "nowrap",
     overflow: "hidden",
     textOverflow: "ellipsis",
+    color: "var(--text)",
   },
   editInput: {
     width: "100%",
     padding: "8px 10px",
     borderRadius: 10,
     border: "1px solid var(--border)",
-    background: "var(--card)",
-    color: "var(--text)",
     outline: "none",
+    background: "var(--input-bg)",
+    color: "var(--input-text)",
   },
   actions: {
     display: "flex",
@@ -184,10 +185,13 @@ const styles = {
     gap: 6,
   },
   actionBtn: {
-    border: "none",
+    border: "1px solid transparent",
     background: "transparent",
-    color: "var(--text)",
     cursor: "pointer",
     fontSize: 18,
+    color: "var(--text)",
+    borderRadius: 10,
+    padding: "6px 8px",
   },
 };
+
