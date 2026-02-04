@@ -31,20 +31,17 @@ authorization, relational database modeling, and layered architecture.
 **Requirements**
 
 - Node.js (version 18 or higher recommended)
-- PostgreSQL running locally
+- PostgreSQL (local or cloud)
 
 **Environment Configuration**
 
 Create a `.env` file inside the `backend` folder with the following variables:
 
-NODE_ENV=development  
-PORT=3000  
-
-DB_HOST=localhost  
-DB_PORT=5432  
-DB_USER=postgres  
-DB_PASSWORD=your_password  
-DB_NAME=task_manager  
+DATABASE_URL=postgresql://user:password@localhost:5432/task_manager
+JWT_SECRET=your_jwt_secret
+JWT_EXPIRES_IN=1h
+PORT=3000
+NODE_ENV=development
 
 JWT_SECRET=your_jwt_secret  
 JWT_EXPIRES_IN=1h  

@@ -12,15 +12,17 @@ app.use(cors({
   origin: "*",
 }));
 
-// middleware global para JSON
+
 app.use(express.json());
 
-// rota de health check
-app.get('/health', (req, res) => {
-  res.json({ status: 'ok' });
+app.get("/", (req, res) => {
+  res.json({
+    name: "Task Manager API",
+    status: "running",
+    health: "/health",
+  });
 });
 
-// rotas da aplicação
 app.use('/auth', authRoutes);
 app.use('/profile', profileRoutes);
 app.use('/tasks', router);
