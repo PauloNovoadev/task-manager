@@ -7,6 +7,10 @@ for tasks associated with each authenticated user.
 The main goal of this project is to consolidate backend concepts such as authentication,
 authorization, relational database modeling, and layered architecture.
 
+# Live App: https://task-manager-fs-beta.vercel.app  
+
+# Task Manager API: https://task-manager-fb99.onrender.com
+
 # Backend
 
 **Features**
